@@ -1,11 +1,11 @@
-html {
+html, body {
   height: 100%;
 }
 
-body {
-  height: 100%;
+#root {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .logo {

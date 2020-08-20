@@ -1,34 +1,59 @@
 import React from "react";
-import "./styles.css";
 import "./reset.css";
+import "./styles.css";
+import LiveCardItem from './LiveCardItem';
+import NavItem from './NavItem';
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isNavToggle: false,
+      topGameList: []
+    };
   }
+
+  componentDidMount() {
+    const topGameUrl = "https://api.twitch.tv/kraken/games/top?limit=5";
+    fetch(topGameUrl)
+    .then((response) => response.json())
+    .then((response)=> {
+      const { top } = response;
+      console.log('top', top);
+      
+  }
+
+  handleToggleNavList = () => {
+    this.setState({
+      isNavToggle: !this.state.isNavToggle,
+    });
+  }
+  
   render() {
+    const {isNavToggle} = this.state;
+    const navListShow = isNavToggle ? 'show' : '';
+    const navIconClose = isNavToggle ? 'close': '';
     return (
       <React.Fragment>
         <nav>
-          <div class="nav-switch">
-            <div class="logo">Twitch Top Games</div>
-            <div class="nav-toggle">
-              <div class="normal-icon">
-                <div class="line top"></div>
-                <div class="line middle"></div>
-                <div class="line bottom"></div>
+          <div className="nav-switch">
+            <div className="logo">Twitch Top Games</div>
+            <div className="nav-toggle" onClick={this.handleToggleNavList}>
+              <div className={`normal-icon ${navIconClose}`}>
+                <div className="line top"></div>
+                <div className="line middle"></div>
+                <div className="line bottom"></div>
               </div>
             </div>
           </div>
-          <ul class="nav-list"></ul>
+          <ul className={`nav-list ${navListShow}`}></ul>
         </nav>
-        <section class="live">
-          <h1 class="live-title">請先點選上方遊戲</h1>
-          <h2 class="live-subtitle">
+        <section className="live">
+          <h1 className="live-title">請先點選上方遊戲</h1>
+          <h2 className="live-subtitle">
             Top 20 popular live streams sorted by current viewers
           </h2>
-          <div class="live-card__group"></div>
+          <div className="live-card__group"></div>
         </section>
       </React.Fragment>
     );
