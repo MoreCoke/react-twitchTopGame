@@ -1,10 +1,7 @@
 import React from 'react';
 
 export default function LiveCardItem({ stream }) {
-  const {
-    channel: { display_name, logo, status, url: twitchUrl },
-    preview: { medium: gameBgc },
-  } = stream;
+  const { display_name, logo, status, twitchUrl, gameBgc } = stream;
   return (
     <a className="live-card__item" href={twitchUrl} target="_blank">
       <div
