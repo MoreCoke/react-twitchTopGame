@@ -146,6 +146,11 @@ nav {
   box-shadow: 1px 1px 5px black;
 }
 
+.live-card__empty {
+  margin: 8px;
+  flex: 0 1 320px;
+}
+
 .live-card__img {
   background-position: center center;
   background-size: cover;
